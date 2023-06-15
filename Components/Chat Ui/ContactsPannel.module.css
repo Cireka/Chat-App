@@ -1,0 +1,11 @@
+.ContactsPannelParrent {
+  width: 40rem;
+  height: 75rem;
+  border: 1px solid #e1e2ff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  padding-top: 2rem;
+}
+.ContactsPannelParrent > h1 {
+  color: #000000;
+}

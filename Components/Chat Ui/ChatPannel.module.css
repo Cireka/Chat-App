@@ -1,0 +1,53 @@
+.ChatPannel {
+  position: relative;
+  width: 75rem;
+  height: 75rem;
+  border: 1px solid #e1e2ff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  padding-top: 2rem;
+}
+
+.chat {
+  resize: none;
+  position: absolute;
+  width: 70rem;
+  height: 5.8rem;
+  bottom: 1px;
+  border: 1px solid #a5a6f6;
+  border-radius: 10px;
+  outline: none;
+  padding-left: 3.2rem;
+  padding-right: 13.2rem;
+  padding-top: 1.6rem;
+}
+.IconParrent {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  bottom: 0.9rem;
+  right: 6.2rem;
+}
+.sendIconParrent {
+  background-color: #5d5fef;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.sendIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: white;
+}
+.AttachIcon {
+  cursor: pointer;
+  color: #5d5fef;
+  width: 2.4rem;
+  height: 2.4rem;
+}
