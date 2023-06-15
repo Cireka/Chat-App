@@ -1,0 +1,24 @@
+.NavigationSection {
+  width: 100vw;
+  height: 8.6rem;
+  background-color: #5d5fef;
+  margin-bottom: 6rem;
+}
+.NaviagtionParrent {
+  padding: 0 4.7rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.IconParrents {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+.Icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: white;
+  cursor: pointer;
+}

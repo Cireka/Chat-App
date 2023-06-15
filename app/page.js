@@ -1,4 +1,4 @@
-import Chat from "@/Components/Chat";
+import Chat from "@/Components/main/Chat";
 import { Fragment } from "react";
 
 export default function Home() {
