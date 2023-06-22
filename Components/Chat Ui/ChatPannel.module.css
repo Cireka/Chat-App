@@ -30,19 +30,14 @@
   bottom: 0.9rem;
   right: 6.2rem;
 }
-.sendIconParrent {
-  background-color: #5d5fef;
+
+.sendIcon {
+  cursor: pointer;
   width: 4rem;
   height: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0.6rem;
+  background-color: #5d5fef;
   border-radius: 10px;
-  cursor: pointer;
-}
-.sendIcon {
-  width: 2.4rem;
-  height: 2.4rem;
   color: white;
 }
 .AttachIcon {
@@ -50,4 +45,21 @@
   color: #5d5fef;
   width: 2.4rem;
   height: 2.4rem;
+}
+.Message {
+  color: #f3f3f3;
+  font-size: 1.4rem;
+}
+.MessageWrap {
+  background-color: #7879f1;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  padding-right: 1.8rem;
+  width: fit-content;
+  margin-top: 1.2rem;
+}
+.TimePar {
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+  padding-left: 0.2rem;
 }

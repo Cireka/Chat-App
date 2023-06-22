@@ -1,10 +1,10 @@
-import Chat from "@/Components/main/Chat";
+import Register from "@/Components/Landing/Register";
 import { Fragment } from "react";
 
 export default function Home() {
   return (
     <Fragment>
-      <Chat />
+      <Register />
     </Fragment>
   );
 }

@@ -16,6 +16,7 @@ export default function ChatPannel({ socket }) {
   };
 
   socket.on("message", (msg) => {
+    console.log(msg);
     setChatMessages([...chatMessages, msg]);
   });
 
@@ -39,7 +40,16 @@ export default function ChatPannel({ socket }) {
       <div className={style.ChatPannel}>
         {chatMessages &&
           chatMessages.map((message) => {
-            return <p>{message}</p>;
+            return (
+              <div key={Math.random()}>
+                <div className={style.MessageWrap}>
+                  <p className={style.Message}>{message.text}</p>
+                </div>
+                <p className={style.TimePar}>
+                  {message.userName} {message.time}
+                </p>
+              </div>
+            );
           })}
         <textarea
           onKeyDown={enterHandller}
@@ -48,12 +58,7 @@ export default function ChatPannel({ socket }) {
           className={style.chat}
         ></textarea>
         <div className={style.IconParrent}>
-          <div className={style.sendIconParrent}>
-            <BsFillSendFill
-              onClick={SubmitHandller}
-              className={style.sendIcon}
-            />
-          </div>
+          <BsFillSendFill onClick={SubmitHandller} className={style.sendIcon} />
           <MdAttachFile className={style.AttachIcon} />
         </div>
       </div>

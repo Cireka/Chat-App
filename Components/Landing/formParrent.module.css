@@ -1,0 +1,45 @@
+.formParrent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 60%;
+}
+.Form > * {
+  color: #f3f3f3;
+}
+.Form > input {
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid white;
+  text-indent: 1.2rem;
+  color: black;
+  height: 2.8rem;
+}
+.Form > label {
+  font-size: 1.4rem;
+}
+.Form > button {
+  font-size: 1.4rem;
+  border-radius: 8px;
+  border: 1px solid white;
+  color: #182848;
+  cursor: pointer;
+}
+.Wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40rem;
+  height: 15rem;
+  background-color: #4a56cb;
+  border-radius: 10px;
+  padding: 1.2rem;
+}
