@@ -8,7 +8,9 @@ export default function Register() {
 
   const NavigateHandller = (event) => {
     event.preventDefault();
-    route.push(`/chat/${name}`);
+    if (name) {
+      route.push(`/chat/${name}`);
+    }
   };
   const inputHandller = (event) => {
     const userName = event.target.value;
