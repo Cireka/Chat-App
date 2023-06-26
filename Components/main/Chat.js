@@ -1,36 +1,25 @@
 "use client";
-import { Fragment, useState, useEffect } from "react";
-import style from "./Chat.module.css";
+import { Fragment } from "react";
 import Header from "../Header/Header";
 import ChatWrap from "../ChatWrap/ChatWrap";
 import ContactsPannel from "../Chat Ui/ContactsPannel";
 import ChatPannel from "../Chat Ui/ChatPannel";
-import { io } from "socket.io-client";
+import { useContext } from "react";
+import Context from "../Context/Context";
 
-export default function Chat() {
-  const [socket, setSocket] = useState(null);
-  useEffect(() => {
-    const socket = io.connect("http://localhost:3001");
+export default function Chat(props) {
+  const ctx = useContext(Context);
 
-    setSocket(socket);
+  const socket = ctx.socket;
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-  // All of the code below happends when user connects!
-  // because that how we configured it in the backend.
-  // socket.on("message", (message) => {
-  //   // console.log(message);
-  // });
+  const userName = props.userName;
 
   return (
     <Fragment>
       <Header />
       <ChatWrap>
-        <ContactsPannel />
-        {socket && <ChatPannel socket={socket} />}
+        {socket && <ContactsPannel userName={userName} socket={socket} />}
+        {socket && <ChatPannel userName={userName} socket={socket} />}
       </ChatWrap>
     </Fragment>
   );

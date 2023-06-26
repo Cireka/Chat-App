@@ -3,22 +3,30 @@ import { useState, useEffect } from "react";
 import style from "./ChatPannel.module.css";
 import { BsFillSendFill } from "react-icons/bs";
 import { MdAttachFile } from "react-icons/md";
+import Context from "../Context/Context";
+import { useContext } from "react";
 
-export default function ChatPannel({ socket }) {
+export default function ChatPannel({ socket, userName }) {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
 
+  const ctx = useContext(Context);
+
+  const currentRoom = ctx.room;
+
   const handleMessageSubmit = () => {
     // send message
-    socket.emit("chatMessage", message);
+    socket.emit("chatMessage", { message, userName });
     // ande after sending it clear input
     setMessage("");
   };
 
-  socket.on("message", (msg) => {
-    console.log(msg);
-    setChatMessages([...chatMessages, msg]);
-  });
+  useEffect(() => {
+    socket.on("message", (msg) => {
+      console.log(msg);
+      setChatMessages((prevMessages) => [...prevMessages, msg]);
+    });
+  }, [socket]);
 
   const SubmitHandller = (event) => {
     event.preventDefault();

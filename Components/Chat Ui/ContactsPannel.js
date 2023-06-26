@@ -2,9 +2,16 @@
 import style from "./ContactsPannel.module.css";
 import { BsPlusSquare } from "react-icons/bs";
 import Contact from "../Rooms Ui/Contact";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import Context from "../Context/Context";
+import { useContext } from "react";
 
-export default function ContactsPannel() {
+export default function ContactsPannel(props) {
+  const socket = props.socket;
+  const userName = props.userName;
+  const ctx = useContext(Context);
+  const currentRoom = ctx.room;
+
   const [error, setError] = useState(false);
   const [chats, setChats] = useState([
     {
@@ -13,6 +20,16 @@ export default function ContactsPannel() {
   ]);
   const [joinPannel, setJoinPannel] = useState(false);
   const [joinRoom, setJoinRoom] = useState("");
+
+  // PROBLEM IS HERE
+  useEffect(() => {
+    console.log(`Joining This Room: ${currentRoom}`);
+    socket.emit("joinRoom", { userName, room: currentRoom });
+  }, [currentRoom]);
+
+  const SelechChatHandller = (name) => {
+    ctx.setCurrentRoom(name);
+  };
 
   const addContactHandller = () => {
     setError(false);
@@ -57,7 +74,13 @@ export default function ContactsPannel() {
         <BsPlusSquare onClick={addContactHandller} className={style.icon} />
       </div>
       {chats.map((chat) => {
-        return <Contact key={Math.random()} chatName={`${chat.chatName}`} />;
+        return (
+          <Contact
+            onClick={() => SelechChatHandller(chat.chatName)}
+            key={Math.random()}
+            chatName={`${chat.chatName}`}
+          />
+        );
       })}
     </div>
   );
