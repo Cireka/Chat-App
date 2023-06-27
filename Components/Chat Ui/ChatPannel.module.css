@@ -6,6 +6,7 @@
   border-radius: 20px;
   padding: 1.5rem;
   padding-top: 2rem;
+  padding-bottom: 8.2rem;
 }
 
 .chat {
@@ -62,4 +63,8 @@
   font-size: 1.2rem;
   margin-top: 0.2rem;
   padding-left: 0.2rem;
+}
+.dmsParrent {
+  max-height: 65rem;
+  overflow-y: scroll;
 }

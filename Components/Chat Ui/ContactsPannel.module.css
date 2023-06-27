@@ -1,6 +1,9 @@
 .ContactsPannelParrent {
   width: 40rem;
-  height: 75rem;
+  min-height: 75rem;
+  max-height: 75rem;
+  overflow-y: scroll;
+
   border: 1px solid #e1e2ff;
   border-radius: 20px;
   padding: 1.5rem;

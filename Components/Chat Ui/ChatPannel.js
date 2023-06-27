@@ -5,6 +5,7 @@ import { BsFillSendFill } from "react-icons/bs";
 import { MdAttachFile } from "react-icons/md";
 import Context from "../Context/Context";
 import { useContext } from "react";
+import { useRef } from "react";
 
 export default function ChatPannel({ socket, userName }) {
   const [message, setMessage] = useState("");
@@ -12,6 +13,17 @@ export default function ChatPannel({ socket, userName }) {
 
   const currentRoom = ctx.room;
   const chatMessages = ctx.messages;
+  const dmsParrentRef = useRef();
+
+  const ScrollToBottom = function () {
+    if (dmsParrentRef.current) {
+      dmsParrentRef.current.scrollTop = dmsParrentRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    ScrollToBottom();
+  }, [chatMessages]);
 
   const handleMessageSubmit = () => {
     // send message
@@ -47,30 +59,32 @@ export default function ChatPannel({ socket, userName }) {
   return (
     <form>
       <div className={style.ChatPannel}>
-        {chatMessages &&
-          chatMessages.map((message) => {
-            console.log(message);
-            if (message.room === currentRoom) {
-              return (
-                <div key={Math.random()}>
-                  {message?.text &&
-                    message.text.map((item) => {
-                      console.log(item);
-                      return (
-                        <Fragment>
-                          <div className={style.MessageWrap}>
-                            <p className={style.Message}>{item.message}</p>
-                          </div>
-                          <p className={style.TimePar}>
-                            {item.author} {item.time}
-                          </p>
-                        </Fragment>
-                      );
-                    })}
-                </div>
-              );
-            }
-          })}
+        <div ref={dmsParrentRef} className={style.dmsParrent}>
+          {chatMessages &&
+            chatMessages.map((message) => {
+              console.log(message);
+              if (message.room === currentRoom) {
+                return (
+                  <div key={Math.random()}>
+                    {message?.text &&
+                      message.text.map((item) => {
+                        console.log(item);
+                        return (
+                          <Fragment>
+                            <div className={style.MessageWrap}>
+                              <p className={style.Message}>{item.message}</p>
+                            </div>
+                            <p className={style.TimePar}>
+                              {item.author} {item.time}
+                            </p>
+                          </Fragment>
+                        );
+                      })}
+                  </div>
+                );
+              }
+            })}
+        </div>
         <textarea
           onKeyDown={enterHandller}
           onChange={typeHandller}

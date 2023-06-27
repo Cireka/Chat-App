@@ -12,10 +12,13 @@ export default function ContactsPannel(props) {
   const ctx = useContext(Context);
   const currentRoom = ctx.room;
 
+  const [highlight, setHiglight] = useState(false);
+
   const [error, setError] = useState(false);
   const [chats, setChats] = useState([
     {
       chatName: "Chat #1",
+      highlighted: true,
     },
   ]);
   const [joinPannel, setJoinPannel] = useState(false);
@@ -27,10 +30,15 @@ export default function ContactsPannel(props) {
     socket.emit("joinRoom", { userName, room: currentRoom });
   }, [currentRoom]);
 
-  const SelechChatHandller = (name) => {
+  const selectChatHandller = (name) => {
     ctx.setCurrentRoom(name);
+    setChats((prevChats) =>
+      prevChats.map((item) => ({
+        ...item,
+        highlighted: item.chatName === name, // Update the highlighted property
+      }))
+    );
   };
-
   const addContactHandller = () => {
     setError(false);
     setJoinPannel(!joinPannel);
@@ -47,7 +55,7 @@ export default function ContactsPannel(props) {
       setError("Duplicate Name.");
     } else {
       setError(false);
-      setChats([...chats, { chatName: roomName }]);
+      setChats([...chats, { chatName: roomName, highlighted: false }]);
       setJoinPannel(!joinPannel);
     }
   };
@@ -76,9 +84,10 @@ export default function ContactsPannel(props) {
       {chats.map((chat) => {
         return (
           <Contact
-            onClick={() => SelechChatHandller(chat.chatName)}
+            onClick={() => selectChatHandller(chat.chatName)}
             key={Math.random()}
             chatName={`${chat.chatName}`}
+            highLighted={chat.highlighted}
           />
         );
       })}
