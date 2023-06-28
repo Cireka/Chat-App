@@ -2,5 +2,12 @@
   max-width: 130rem;
   margin: 0 auto;
   display: flex;
+  align-items: center;
   gap: 1.2rem;
+}
+@media (max-width: 627px) {
+  .ChatWrap {
+    flex-direction: column;
+    justify-content: center;
+  }
 }

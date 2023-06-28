@@ -7,6 +7,8 @@
   padding: 1.5rem;
   padding-top: 2rem;
   padding-bottom: 8.2rem;
+  margin: 3.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .chat {
@@ -41,7 +43,7 @@
   border-radius: 10px;
   color: white;
 }
-.AttachIcon {
+.EmojiIcon {
   cursor: pointer;
   color: #5d5fef;
   width: 2.4rem;
@@ -67,4 +69,56 @@
 .dmsParrent {
   max-height: 65rem;
   overflow-y: scroll;
+}
+
+.EmojiParrent {
+  width: 8.2rem;
+  position: absolute;
+  bottom: 10rem;
+}
+
+@media (max-width: 1111px) {
+  .ChatPannel {
+    width: 55rem;
+  }
+  .chat {
+    width: 50rem;
+  }
+}
+@media (max-width: 885px) {
+  .ChatPannel {
+    width: 45rem;
+  }
+  .chat {
+    width: 40rem;
+  }
+}
+
+@media (max-width: 781px) {
+  .ChatPannel {
+    width: 35rem;
+  }
+  .ChatParrent {
+    display: flex;
+    justify-content: center;
+  }
+  .chat {
+    width: 100%;
+  }
+  .IconParrent {
+    gap: 1.6rem;
+    bottom: 0.9rem;
+    right: 2.2rem;
+  }
+}
+@media (max-width: 627px) {
+  .ChatPannel {
+    height: 55rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .ChatPannel {
+    width: 24rem;
+  }
 }

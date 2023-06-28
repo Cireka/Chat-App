@@ -12,8 +12,6 @@ export default function ContactsPannel(props) {
   const ctx = useContext(Context);
   const currentRoom = ctx.room;
 
-  const [highlight, setHiglight] = useState(false);
-
   const [error, setError] = useState(false);
   const [chats, setChats] = useState([
     {
@@ -24,9 +22,7 @@ export default function ContactsPannel(props) {
   const [joinPannel, setJoinPannel] = useState(false);
   const [joinRoom, setJoinRoom] = useState("");
 
-  // PROBLEM IS HERE
   useEffect(() => {
-    console.log(`Joining This Room: ${currentRoom}`);
     socket.emit("joinRoom", { userName, room: currentRoom });
   }, [currentRoom]);
 
@@ -62,35 +58,37 @@ export default function ContactsPannel(props) {
 
   return (
     <div className={style.ContactsPannelParrent}>
-      {joinPannel && (
-        <Fragment>
-          <div onClick={addContactHandller} className={style.Wrap}></div>
-          <div className={style.ChatCreatePannelParrent}>
-            <form className={style.form}>
-              <label>Enter Room Name</label>
-              <input onChange={joinRoomValueHandller} type="text" />
-              {error && <p className={style.errorMessage}>{error}</p>}
-              <button className={style.Button} onClick={joinRoomHandller}>
-                Create/Join Room
-              </button>
-            </form>
-          </div>
-        </Fragment>
-      )}
-      <div className={style.ContactsHeaderParrent}>
-        <h1>Messages</h1>
-        <BsPlusSquare onClick={addContactHandller} className={style.icon} />
+      <div className={style.ContactsPannelContainer}>
+        {joinPannel && (
+          <Fragment>
+            <div onClick={addContactHandller} className={style.Wrap}></div>
+            <div className={style.ChatCreatePannelParrent}>
+              <form className={style.form}>
+                <label>Enter Room Name</label>
+                <input onChange={joinRoomValueHandller} type="text" />
+                {error && <p className={style.errorMessage}>{error}</p>}
+                <button className={style.Button} onClick={joinRoomHandller}>
+                  Create/Join Room
+                </button>
+              </form>
+            </div>
+          </Fragment>
+        )}
+        <div className={style.ContactsHeaderParrent}>
+          <h1>Messages</h1>
+          <BsPlusSquare onClick={addContactHandller} className={style.icon} />
+        </div>
+        {chats.map((chat) => {
+          return (
+            <Contact
+              onClick={() => selectChatHandller(chat.chatName)}
+              key={Math.random()}
+              chatName={`${chat.chatName}`}
+              highLighted={chat.highlighted}
+            />
+          );
+        })}
       </div>
-      {chats.map((chat) => {
-        return (
-          <Contact
-            onClick={() => selectChatHandller(chat.chatName)}
-            key={Math.random()}
-            chatName={`${chat.chatName}`}
-            highLighted={chat.highlighted}
-          />
-        );
-      })}
     </div>
   );
 }

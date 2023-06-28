@@ -3,11 +3,12 @@
   min-height: 75rem;
   max-height: 75rem;
   overflow-y: scroll;
-
   border: 1px solid #e1e2ff;
   border-radius: 20px;
   padding: 1.5rem;
   padding-top: 2rem;
+  margin: 3.2rem;
+  margin-bottom: 1.2rem;
 }
 .ContactsHeaderParrent {
   display: flex;
@@ -25,7 +26,10 @@
   transition: ease-in-out 0.3s;
 }
 .icon:hover {
-  color: #4143a7;
+  -webkit-box-shadow: 0px 0px 74px 0px rgba(185, 46, 255, 0.35);
+  -moz-box-shadow: 0px 0px 74px 0px rgba(185, 46, 255, 0.35);
+  box-shadow: 0px 0px 74px 0px rgba(185, 46, 255, 0.35);
+  color: #b92eff;
   cursor: pointer;
 }
 .ChatCreatePannelParrent {
@@ -79,4 +83,29 @@
 }
 .errorMessage {
   color: red;
+}
+@media (max-width: 1111px) {
+  .ContactsPannelParrent {
+    margin-left: 1.2rem;
+    margin-right: 0;
+  }
+}
+@media (max-width: 627px) {
+  .ContactsPannelParrent {
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    min-height: 35rem;
+    max-height: 35rem;
+  }
+  .ContactsPannelContainer {
+    margin-left: 5.2rem;
+    margin-right: 5.2rem;
+  }
+}
+@media (max-width: 420px) {
+  .ContactsPannelParrent {
+    width: 28rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

@@ -2,13 +2,15 @@
 import { useState, useEffect, Fragment } from "react";
 import style from "./ChatPannel.module.css";
 import { BsFillSendFill } from "react-icons/bs";
-import { MdAttachFile } from "react-icons/md";
+import { BsEmojiSmile } from "react-icons/bs";
 import Context from "../Context/Context";
 import { useContext } from "react";
 import { useRef } from "react";
+import EmojiPicker from "emoji-picker-react";
 
 export default function ChatPannel({ socket, userName }) {
   const [message, setMessage] = useState("");
+  const [emoji, setEmoji] = useState(false);
   const ctx = useContext(Context);
 
   const currentRoom = ctx.room;
@@ -42,12 +44,14 @@ export default function ChatPannel({ socket, userName }) {
 
   const SubmitHandller = (event) => {
     event.preventDefault();
+    console.log(message);
     if (message !== "") {
       handleMessageSubmit();
     }
   };
   const enterHandller = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey && message !== "") {
+      event.preventDefault();
       handleMessageSubmit();
     }
   };
@@ -56,19 +60,21 @@ export default function ChatPannel({ socket, userName }) {
     setMessage(message);
   };
 
+  const EmojiHandller = () => {
+    setEmoji(!emoji);
+  };
+
   return (
-    <form>
+    <form className={style.Form}>
       <div className={style.ChatPannel}>
         <div ref={dmsParrentRef} className={style.dmsParrent}>
           {chatMessages &&
             chatMessages.map((message) => {
-              console.log(message);
               if (message.room === currentRoom) {
                 return (
                   <div key={Math.random()}>
                     {message?.text &&
                       message.text.map((item) => {
-                        console.log(item);
                         return (
                           <Fragment>
                             <div className={style.MessageWrap}>
@@ -85,15 +91,40 @@ export default function ChatPannel({ socket, userName }) {
               }
             })}
         </div>
-        <textarea
-          onKeyDown={enterHandller}
-          onChange={typeHandller}
-          value={message}
-          className={style.chat}
-        ></textarea>
+        <div className={style.ChatParrent}>
+          <textarea
+            onKeyDown={enterHandller}
+            onChange={typeHandller}
+            value={message}
+            className={style.chat}
+          ></textarea>
+        </div>
         <div className={style.IconParrent}>
           <BsFillSendFill onClick={SubmitHandller} className={style.sendIcon} />
-          <MdAttachFile className={style.AttachIcon} />
+          {emoji && (
+            <div className={style.EmojiParrent}>
+              <EmojiPicker
+                className={style.test}
+                emojiStyle="facebook"
+                lazyLoadEmojis={true}
+                theme="dark"
+                onEmojiClick={(e) =>
+                  setMessage((prevValue) => `${prevValue}${e.emoji}`)
+                }
+              />
+              {/* <Picker
+                width={"10px"}
+                onEmojiSelect={(e) =>
+                  setMessage((prevValue) => `${prevValue}${e.native}`)
+                }
+                onClickOutside={() => EmojiHandller()}
+                emojiSize={20}
+                size={"12em"}
+                data={data}
+              /> */}
+            </div>
+          )}
+          <BsEmojiSmile onClick={EmojiHandller} className={style.EmojiIcon} />
         </div>
       </div>
     </form>
